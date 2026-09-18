@@ -52,3 +52,20 @@ Content adapted from AccountingCoach.com's 33-topic outline, IRS Publications 15
 - Hearts: max 5, one regenerates every 30 min; the top bar shows a live countdown. Click the hearts to open the recovery panel.
 - Out of hearts? Practice your weakest completed lesson (≥70% accuracy earns +1 heart, free) or refill all hearts for 50 gems.
 - Gems: +5 per lesson, +10 for a perfect score, +20 on league promotion; practice gives half.
+
+## Environment configuration
+Firebase settings live in `.env` (git-ignored) and are compiled into `firebase-config.js` (also git-ignored):
+
+```bash
+cp .env.example .env      # fill in values from Firebase console
+npm start                 # runs build-config.js then serves on :8080
+# or: node build-config.js && python3 -m http.server 8080
+```
+
+In CI/hosting, set the same variables (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`,
+`FIREBASE_STORAGE_BUCKET`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_APP_ID`) as environment variables and run
+`node build-config.js` before deploying. Use a different `.env` per environment (dev / prod Firebase project).
+
+Note: a Firebase web config is not a secret — it is shipped to browsers by design. Protect data with
+`firestore.rules` and the Auth *Authorized domains* list, and optionally restrict the API key by HTTP referrer
+in Google Cloud Console.
