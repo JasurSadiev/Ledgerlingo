@@ -1,0 +1,14 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "ledgerlingo_users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "league", "order": "ASCENDING" },
+        { "fieldPath": "weekKey", "order": "ASCENDING" },
+        { "fieldPath": "weekXp", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
